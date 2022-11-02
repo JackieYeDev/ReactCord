@@ -1,11 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 const UserContext = React.createContext();
 function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   return (
-    <UserContext.UserProvider value={[user, setUser]}>
+    <UserContext.Provider value={[user, setUser]}>
       {children}
-    </UserContext.UserProvider>
+    </UserContext.Provider>
   );
 }
+
 export { UserContext, UserProvider };
