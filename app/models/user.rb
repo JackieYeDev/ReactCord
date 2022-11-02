@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validate :validate_age
 
   has_many :subscriptions, dependent: :destroy
+  has_many :channels
   has_many :channels, through: :subscriptions
   has_many :messages, dependent: :destroy
 
