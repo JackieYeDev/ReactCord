@@ -8,3 +8,4 @@ function UserProvider({ children }) {
     </UserContext.UserProvider>
   );
 }
+export { UserContext, UserProvider };
