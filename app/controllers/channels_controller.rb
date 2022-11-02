@@ -1,13 +1,19 @@
 class ChannelsController < ApplicationController
   def create
-    user_id = session[:user_id]
-    if user_id.nil?
-      render json: { error: "Unauthorized" }, status: :unauthorized
-    else
-      channel = Channel.create!(:name=>params[:name], :user_id=> user_id)
-      subscription = Subscription.create!(:channel_id=>channel.id, :user_id=> user_id)
+    user = User.find(session[:user_id])
+    if user
+      # channel = Channel.create!(name: params[:name], user_id: user.id)
+      channel = Channel.create!(name: params[:name])
+      subscription = user.subscriptions.create!(:channel_id => channel.id)
       render json: channel, status: :created
+    else
+      render json: { error: "Unauthorized" }, status: :unauthorized
     end
+  end
+
+  def index
+    channels = Channel.all
+    render json: channels
   end
 
   def destroy
