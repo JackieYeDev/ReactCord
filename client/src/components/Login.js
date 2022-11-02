@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../context/user";
 
 function Login() {
+  const [, setUser] = useContext(UserContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -21,7 +23,7 @@ function Login() {
       }),
     })
       .then((res) => res.json())
-      .then((response) => console.log(response));
+      .then((response) => setUser(response));
   }
   return (
     <div>
