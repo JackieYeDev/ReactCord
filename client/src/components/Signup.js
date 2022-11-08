@@ -26,6 +26,8 @@ function Signup() {
     }).then((res) => {
       if (res.ok) {
         res.json().then((response) => console.log(response));
+      } else {
+        console.log(res);
       }
     });
   }
