@@ -21,9 +21,13 @@ function Login() {
         username: formData.username,
         password: formData.password,
       }),
-    })
-      .then((res) => res.json())
-      .then((response) => setUser(response));
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((response) => setUser(response));
+      } else {
+        console.log(res);
+      }
+    });
   }
   return (
     <div>
