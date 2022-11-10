@@ -1,0 +1,33 @@
+import React, { useEffect, useState } from "react";
+import { ListGroup, ListGroupItem } from "reactstrap";
+
+function Messages(props) {
+  const channelId = props.channelId;
+  const [messages, setMessages] = useState([]);
+  useEffect(() => {
+    console.log("This in Messages is called");
+    props.messagesChannel.received = (data) => console.log(data);
+  }, []);
+  useEffect(() => {
+    fetch(`/channels/${channelId}/messages`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        setMessages(response);
+        // console.log(response);
+      });
+  }, []);
+  return (
+    <ListGroup>
+      {messages !== [] &&
+        messages.map((message, index) => (
+          <ListGroupItem key={index}>
+            {message.user.username} : {message.content}
+          </ListGroupItem>
+        ))}
+    </ListGroup>
+  );
+}
+
+export default Messages;

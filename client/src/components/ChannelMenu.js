@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Nav, NavItem, NavLink } from "reactstrap";
 
 function ChannelMenu() {
   const [channels, setChannels] = useState([]);
@@ -11,14 +12,16 @@ function ChannelMenu() {
   }, []);
 
   return (
-    <div>
-      <ul>
-        {channels &&
-          channels.map((channel, index) => {
-            return <li key={index}>{channel.name}</li>;
-          })}
-      </ul>
-    </div>
+    <Nav>
+      {channels &&
+        channels.map((channel, index) => {
+          return (
+            <NavItem key={index}>
+              <NavLink href={`/channel/${channel.id}`}>{channel.name}</NavLink>
+            </NavItem>
+          );
+        })}
+    </Nav>
   );
 }
 export default ChannelMenu;

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../context/user";
+import { useHistory } from "react-router-dom";
 
 function Login() {
   const [, setUser] = useContext(UserContext);
@@ -7,6 +8,7 @@ function Login() {
     username: "",
     password: "",
   });
+  let history = useHistory();
   function handleFormDataInput(e) {
     setFormData({ ...formData, [`${e.target.name}`]: e.target.value });
   }
@@ -23,7 +25,10 @@ function Login() {
       }),
     }).then((res) => {
       if (res.ok) {
-        res.json().then((response) => setUser(response));
+        res.json().then((response) => {
+          setUser(response);
+          history.push("/");
+        });
       } else {
         console.log(res);
       }

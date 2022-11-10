@@ -1,11 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import Login from "./Login";
 import Logout from "./Logout";
-import Signup from "./Signup";
 import MessageBox from "./MessageBox";
-import NewChannel from "./NewChannel";
 import ChannelMenu from "./ChannelMenu";
 import { UserContext } from "../context/user";
+import { Link } from "react-router-dom";
 function Dashboard() {
   const [user, setUser] = useContext(UserContext);
   useEffect(() => {
@@ -25,15 +23,14 @@ function Dashboard() {
     <>
       {user === null ? (
         <div>
-          <Login />
-          <Signup />
+          <Link to={"/login"}>Login</Link>
+          <Link to={"/signup"}>Signup</Link>
         </div>
       ) : (
         <div>
           <Logout />
-
-          <MessageBox />
-          <NewChannel />
+          {/*<MessageBox />*/}
+          <Link to={"/new-channel"}>New Channel</Link>
           <ChannelMenu />
         </div>
       )}
