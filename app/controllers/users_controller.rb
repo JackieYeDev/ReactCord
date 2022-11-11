@@ -17,6 +17,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def change_status
+
+  end
+
   private
   def user_params
     params.permit(:username, :full_name, :birthday, :password, :password_confirmation)
