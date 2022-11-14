@@ -1,11 +1,22 @@
 import React, { useState } from "react";
+import {
+  Button,
+  Card,
+  CardText,
+  CardTitle,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+} from "reactstrap";
 
 function Signup() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
     passwordConfirmation: "",
-    fullName: "",
+    email: "",
     birthday: "",
   });
 
@@ -20,7 +31,7 @@ function Signup() {
         username: formData.username,
         password: formData.password,
         password_confirmation: formData.passwordConfirmation,
-        full_name: formData.fullName,
+        email: formData.email,
         birthday: formData.birthday,
       }),
     }).then((res) => {
@@ -36,51 +47,62 @@ function Signup() {
   }
 
   return (
-    <div>
-      <form onSubmit={(e) => handleSignup(e)}>
-        <p>
-          <input
-            name={"username"}
-            placeholder={"Please enter a username"}
-            value={formData.username}
-            onChange={(e) => handleInput(e)}
-          />
-        </p>
-        <p>
-          <input
-            name={"password"}
-            placeholder={"Please enter a password (6 characters or more)"}
-            value={formData.password}
-            onChange={(e) => handleInput(e)}
-          />
-        </p>
-        <p>
-          <input
-            name={"passwordConfirmation"}
-            placeholder={"Please re-enter your password"}
-            value={formData.passwordConfirmation}
-            onChange={(e) => handleInput(e)}
-          />
-        </p>
-        <p>
-          <input
-            name={"fullName"}
-            placeholder={"Please enter your full name"}
-            value={formData.fullName}
-            onChange={(e) => handleInput(e)}
-          />
-        </p>
-        <p>
-          <input
-            name={"birthday"}
-            value={formData.birthday}
-            onChange={(e) => handleInput(e)}
-            type={"date"}
-          />
-        </p>
-        <button type={"submit"}>Signup!</button>{" "}
-      </form>
-    </div>
+    <Container>
+      <Card body className={"my-2"} style={{ width: "18rem" }} color={"36393F"}>
+        <CardTitle className={"text-center"}>Create an account</CardTitle>
+        <CardText>
+          <Form onSubmit={(e) => handleSignup(e)}>
+            <FormGroup>
+              <Label for={"inputEmail"}>Email</Label>
+              <Input
+                id={"inputEmail"}
+                name={"email"}
+                value={formData.fullName}
+                onChange={(e) => handleInput(e)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for={"inputUsername"}>Username</Label>
+              <Input
+                id={"inputUsername"}
+                name={"username"}
+                value={formData.username}
+                onChange={(e) => handleInput(e)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for={"inputPassword"}>Password</Label>
+              <Input
+                id={"inputPassword"}
+                name={"password"}
+                value={formData.password}
+                onChange={(e) => handleInput(e)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for={"inputPasswordConfirmation"}>Confirm Password</Label>
+              <Input
+                id={"inputPasswordConfirmation"}
+                name={"passwordConfirmation"}
+                value={formData.passwordConfirmation}
+                onChange={(e) => handleInput(e)}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for={"inputBirthday"}>Date of Birth</Label>
+              <Input
+                id={"inputBirthday"}
+                name={"birthday"}
+                value={formData.birthday}
+                onChange={(e) => handleInput(e)}
+                type={"date"}
+              />
+            </FormGroup>
+          </Form>
+        </CardText>
+        <Button type={"submit"}>Continue</Button>
+      </Card>
+    </Container>
   );
 }
 export default Signup;
