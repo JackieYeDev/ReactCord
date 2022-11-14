@@ -48,7 +48,7 @@ function Signup() {
 
   return (
     <Container>
-      <Card body className={"my-2"} style={{ width: "18rem" }} color={"36393F"}>
+      <Card body className={"my-2"} style={{ width: "36rem" }} color={"36393F"}>
         <CardTitle className={"text-center"}>Create an account</CardTitle>
         <CardText>
           <Form onSubmit={(e) => handleSignup(e)}>
@@ -57,7 +57,7 @@ function Signup() {
               <Input
                 id={"inputEmail"}
                 name={"email"}
-                value={formData.fullName}
+                value={formData.email}
                 onChange={(e) => handleInput(e)}
               />
             </FormGroup>
