@@ -10,6 +10,7 @@ import {
   FormGroup,
   Input,
   Label,
+  NavLink,
 } from "reactstrap";
 
 function Login() {
@@ -92,7 +93,7 @@ function Login() {
       </CardText>
       <Button type={"submit"}>Log In</Button>
       <CardText style={{ fontSize: "14px", color: "#A3A6AA" }}>
-        Need an account? Register
+        Need an account? <a href={"/signup"}>Register</a>
       </CardText>
     </Card>
   );
