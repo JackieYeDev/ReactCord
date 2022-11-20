@@ -9,15 +9,18 @@ import Signup from "./components/Signup";
 import NewChannel from "./components/NewChannel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Channels from "./components/Channels";
+import { CableProvider } from "./context/cable";
 
 ReactDOM.render(
   <BrowserRouter>
     <UserProvider>
-      <Route path={"/"} component={App} />
-      <Route path={"/login"} component={Login} />
-      <Route path={"/signup"} component={Signup} />
-      <Route path={"/new-channel"} component={NewChannel} />
-      <Route path={"/channel/:id"} component={Channels} />
+      <CableProvider>
+        <Route path={"/"} component={App} />
+        <Route path={"/login"} component={Login} />
+        <Route path={"/signup"} component={Signup} />
+        <Route path={"/new-channel"} component={NewChannel} />
+        <Route path={"/channel/:id"} component={Channels} />
+      </CableProvider>
     </UserProvider>
   </BrowserRouter>,
   document.getElementById("root")

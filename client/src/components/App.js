@@ -8,7 +8,7 @@ function App() {
   const [user, setUser] = useContext(UserContext);
   return (
     <div className="App">
-      <Switch>{user === null ? <LandingPage /> : null}</Switch>
+      <Switch>{user === null ? <LandingPage /> : <LandingPage />}</Switch>
     </div>
   );
 }
