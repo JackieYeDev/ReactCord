@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if user.valid?
       session[:user_id] = user.id
       session[:channel_id] = nil
-      ActionCable.server.broadcast('user_channel', user.username)
+      # ActionCable.server.broadcast('user_channel', user.username)
       render json: user, status: :created
     else
       render json: {errors: user.errors.full_messages}, status: :unprocessable_entity

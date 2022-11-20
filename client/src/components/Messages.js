@@ -1,46 +1,75 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import ActionCable from "actioncable";
+import { useParams } from "react-router-dom";
+import { UserContext } from "../context/user";
+import { CableContext } from "../context/cable";
 
-function Messages(props) {
-  const channelId = props.channelId;
+function Messages() {
+  const [user, setUser] = useContext(UserContext);
+  const cableContext = useContext(CableContext);
+  const { id: channelId } = useParams();
   const [messages, setMessages] = useState([]);
-  const cable = ActionCable.createConsumer("ws://localhost:3000/cable");
-  const createSubscription = () => {
-    cable.subscriptions.create(
-      { channel: "MessagesChannel" },
+  const [content, setContent] = useState("");
+  const chatChannel = useRef(null);
+  useEffect(() => {
+    chatChannel.current = cableContext.cable.subscriptions.create(
       {
-        connected: () => console.log("Connected"),
-        disconnected: () => console.log("Disconnected"),
-        received: (data) => console.log(data),
+        channel: "ChatChannel",
+        id: channelId,
+      },
+      {
+        received: (data) => {
+          setMessages((prevMessages) => {
+            return Array.isArray(data) ? data : [data, ...prevMessages];
+          });
+        },
+        connected: () => console.log("connected"),
+        disconnected: () => console.log("disconnected"),
       }
     );
-  };
-  useEffect(() => {
-    createSubscription();
-  }, []);
-  useEffect(() => {
-    console.log("This in Messages is called");
-    props.messagesChannel.received = (data) => console.log(data);
-  }, []);
-  useEffect(() => {
-    fetch(`/channels/${channelId}/messages`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((response) => {
-        setMessages(response);
-      });
-  }, []);
+    return () => chatChannel.current.unsubscribe();
+  }, [cableContext, channelId]);
+  // useEffect(() => {
+  //   fetch(`/channels/${channelId}/messages`, {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((response) => {
+  //       console.log(response);
+  //       setMessages(response);
+  //     });
+  // }, []);
+  function handleSubmit(e) {
+    e.preventDefault();
+    chatChannel.current.send({ content, channelId, userId: user.id });
+    setContent("");
+  }
   return (
-    <ListGroup>
-      {messages !== [] &&
-        messages.map((message, index) => (
-          <ListGroupItem key={index}>
-            {message.user.username} : {message.content}
-          </ListGroupItem>
-        ))}
-    </ListGroup>
+    <>
+      <div>
+        <textarea
+          rows={10}
+          placeholder={"Enter a message here ..."}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        ></textarea>
+        <button
+          onClick={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          Send!
+        </button>
+      </div>
+      <ListGroup>
+        {messages !== [] &&
+          messages.map((message, index) => (
+            <ListGroupItem key={index}>
+              {message.user.username} : {message.content}
+            </ListGroupItem>
+          ))}
+      </ListGroup>
+    </>
   );
 }
 
