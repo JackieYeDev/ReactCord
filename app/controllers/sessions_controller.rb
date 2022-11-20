@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
       cookies.signed[:user_id] = user.id
-      byebug
       # session[:channel_id] = nil
       # ActionCable.server.broadcast('user_channel', user.username)
       render json: user, status: :created
