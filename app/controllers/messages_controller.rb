@@ -1,15 +1,19 @@
 class MessagesController < ApplicationController
+  wrap_parameters :message
   def create
     # Create a new message to be broadcasted to the channels
     # /channels/:id/messages
     user = User.find(session[:user_id])
-    channel = Channel.find(params[:channel_id])
-    if user
-      message = Message.create!(:content=>params[:content], :user_id=>user.id, :channel_id=>channel.id)
-      # render json: message, status: :created
-      ActionCable.server.broadcast('message_channel', message)
-      head :ok
-    end
+    message = user.messages.create(message_params)
+    channel = Channel.find(message.channel_id)
+    ChatChannel.broadcast_to(channel, message.to_json(include: :user))
+    # render json: message, include: :user
+    # if user
+    #   message = Message.create!(:content=>params[:content], :user_id=>user.id, :channel_id=>channel.id)
+    #   # render json: message, status: :created
+    #   ActionCable.server.broadcast('message_channel', message)
+    #   head :ok
+    # end
   end
 
   def index
@@ -35,5 +39,9 @@ class MessagesController < ApplicationController
     # Delete an existing message
     # /channels/:id/messages/
 
+  end
+  private
+  def message_params
+    params.require(:message).permit(:content, :channel_id, :user_id, :read)
   end
 end

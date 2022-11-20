@@ -4,28 +4,27 @@ import ChannelMenu from "./ChannelMenu";
 import { UserContext } from "../context/user";
 import { Link } from "react-router-dom";
 import UserList from "./UserList";
-import ActionCable from "actioncable";
 import NavBar from "./NavBar";
 function LandingPage() {
   const [user, setUser] = useContext(UserContext);
   const [userList, setUserList] = useState([]);
-  const cable = ActionCable.createConsumer("ws://localhost:3000/cable");
-  const createSubscription = () => {
-    cable.subscriptions.create(
-      { channel: "UserChannel" },
-      {
-        connected: () => console.log("Connected"),
-        disconnected: () => console.log("Disconnected"),
-        received: (data) => {
-          console.log(data);
-          setUserList([...userList, data]);
-        },
-      }
-    );
-  };
-  useEffect(() => {
-    createSubscription();
-  }, []);
+  // const cable = ActionCable.createConsumer("ws://localhost:3000/cable");
+  // const createSubscription = () => {
+  //   cable.subscriptions.create(
+  //     { channel: "UserChannel" },
+  //     {
+  //       connected: () => console.log("Connected"),
+  //       disconnected: () => console.log("Disconnected"),
+  //       received: (data) => {
+  //         console.log(data);
+  //         setUserList([...userList, data]);
+  //       },
+  //     }
+  //   );
+  // };
+  // useEffect(() => {
+  //   createSubscription();
+  // }, []);
 
   useEffect(() => {
     fetch("/me", {
