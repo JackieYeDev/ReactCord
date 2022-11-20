@@ -3,7 +3,10 @@ class SessionsController < ApplicationController
     user = User.find_by(username: params[:username])
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      session[:channel_id] = nil
+      cookies.signed[:user_id] = user.id
+      byebug
+      # session[:channel_id] = nil
+      # ActionCable.server.broadcast('user_channel', user.username)
       render json: user, status: :created
     else
       render json: {error: "Invalid Username or Password"}, status: :unauthorized
