@@ -10,6 +10,7 @@ import {
   Input,
   Label,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -19,6 +20,8 @@ function Signup() {
     email: "",
     birthday: "",
   });
+
+  let history = useHistory();
 
   function handleSignup(e) {
     e.preventDefault();
@@ -50,8 +53,8 @@ function Signup() {
     <Container>
       <Card body className={"my-2"} style={{ width: "36rem" }} color={"36393F"}>
         <CardTitle className={"text-center"}>Create an account</CardTitle>
-        <CardText>
-          <Form onSubmit={(e) => handleSignup(e)}>
+        <Form onSubmit={(e) => handleSignup(e)}>
+          <CardText>
             <FormGroup>
               <Label for={"inputEmail"}>Email</Label>
               <Input
@@ -75,6 +78,7 @@ function Signup() {
               <Input
                 id={"inputPassword"}
                 name={"password"}
+                type={"password"}
                 value={formData.password}
                 onChange={(e) => handleInput(e)}
               />
@@ -84,6 +88,7 @@ function Signup() {
               <Input
                 id={"inputPasswordConfirmation"}
                 name={"passwordConfirmation"}
+                type={"password"}
                 value={formData.passwordConfirmation}
                 onChange={(e) => handleInput(e)}
               />
@@ -98,9 +103,9 @@ function Signup() {
                 type={"date"}
               />
             </FormGroup>
-          </Form>
-        </CardText>
-        <Button type={"submit"}>Continue</Button>
+          </CardText>
+          <Button type={"submit"}>Continue</Button>
+        </Form>
       </Card>
     </Container>
   );

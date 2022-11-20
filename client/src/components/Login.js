@@ -35,6 +35,7 @@ function Login() {
         password: formData.password,
       }),
     }).then((res) => {
+      console.log(res);
       if (res.ok) {
         res.json().then((response) => {
           setUser(response);
@@ -85,13 +86,15 @@ function Login() {
             <Input
               id={"inputPassword"}
               name={"password"}
+              type={"password"}
               value={formData.password}
               onChange={(e) => handleFormDataInput(e)}
             />
           </FormGroup>
+          <Button type={"submit"}>Log In</Button>
         </Form>
       </CardText>
-      <Button type={"submit"}>Log In</Button>
+
       <CardText style={{ fontSize: "14px", color: "#A3A6AA" }}>
         Need an account? <a href={"/signup"}>Register</a>
       </CardText>
