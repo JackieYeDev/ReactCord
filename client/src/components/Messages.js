@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { ListGroup, ListGroupItem } from "reactstrap";
+import { Button, Input, ListGroup, ListGroupItem } from "reactstrap";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../context/user";
 import { CableContext } from "../context/cable";
@@ -29,38 +29,14 @@ function Messages() {
     );
     return () => chatChannel.current.unsubscribe();
   }, [cableContext, channelId]);
-  // useEffect(() => {
-  //   fetch(`/channels/${channelId}/messages`, {
-  //     method: "GET",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((response) => {
-  //       console.log(response);
-  //       setMessages(response);
-  //     });
-  // }, []);
   function handleSubmit(e) {
-    e.preventDefault();
-    chatChannel.current.send({ content, channelId, userId: user.id });
-    setContent("");
+    if (e.keyCode == 13) {
+      chatChannel.current.send({ content, channelId, userId: user.id });
+      setContent("");
+    }
   }
   return (
     <>
-      <div>
-        <textarea
-          rows={10}
-          placeholder={"Enter a message here ..."}
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        ></textarea>
-        <button
-          onClick={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          Send!
-        </button>
-      </div>
       <ListGroup>
         {messages !== [] &&
           messages.map((message, index) => (
@@ -69,6 +45,20 @@ function Messages() {
             </ListGroupItem>
           ))}
       </ListGroup>
+      <div>
+        <Input
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          onKeyDown={(e) => handleSubmit(e)}
+        ></Input>
+        {/*<Button*/}
+        {/*  onClick={(e) => {*/}
+        {/*    handleSubmit(e);*/}
+        {/*  }}*/}
+        {/*>*/}
+        {/*  Send!*/}
+        {/*</Button>*/}
+      </div>
     </>
   );
 }
