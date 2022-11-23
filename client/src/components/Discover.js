@@ -1,12 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-  Card,
-  CardFooter,
-  CardGroup,
-  CardText,
-  CardTitle,
-  Container,
-} from "reactstrap";
 
 function Discover() {
   const [channelList, setChannelList] = useState([]);
@@ -20,18 +12,18 @@ function Discover() {
   });
 
   return (
-    <Container style={{ padding: "5rem" }}>
-      <CardGroup>
-        {channelList.map((channel) => {
+    <div style={{ padding: "5rem" }}>
+      <div>
+        {channelList.map((channel, index) => {
           return (
-            <Card>
-              <CardTitle>{channel.name}</CardTitle>
-              <CardFooter>{channel.user_count} Members</CardFooter>
-            </Card>
+            <div key={index} style={{ display: "inline-block" }}>
+              <p>{channel.name}</p>
+              <p>{channel.user_count} Members</p>
+            </div>
           );
         })}
-      </CardGroup>
-    </Container>
+      </div>
+    </div>
   );
 }
 

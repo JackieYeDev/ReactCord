@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Button, Input, ListGroup, ListGroupItem } from "reactstrap";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../context/user";
 import { CableContext } from "../context/cable";
@@ -11,6 +10,7 @@ function Messages() {
   const [messages, setMessages] = useState([]);
   const [content, setContent] = useState("");
   const chatChannel = useRef(null);
+  const listGroupRef = useRef(null);
   useEffect(() => {
     chatChannel.current = cableContext.cable.subscriptions.create(
       {
@@ -20,7 +20,7 @@ function Messages() {
       {
         received: (data) => {
           setMessages((prevMessages) => {
-            return Array.isArray(data) ? data : [data, ...prevMessages];
+            return Array.isArray(data) ? data : [...prevMessages, data];
           });
         },
         connected: () => console.log("connected"),
@@ -29,6 +29,10 @@ function Messages() {
     );
     return () => chatChannel.current.unsubscribe();
   }, [cableContext, channelId]);
+  // TODO: Fix so that messages starts at the bottom
+  // useEffect(() => {
+  //   listGroupRef.current.scrollIntoView({ behavior: "smooth" });
+  // }, []);
   function handleSubmit(e) {
     if (e.keyCode == 13) {
       chatChannel.current.send({ content, channelId, userId: user.id });
@@ -37,27 +41,25 @@ function Messages() {
   }
   return (
     <>
-      <ListGroup>
+      <div
+        className={"message-container"}
+        ref={listGroupRef}
+        style={{ padding: "5rem" }}
+      >
         {messages !== [] &&
           messages.map((message, index) => (
-            <ListGroupItem key={index}>
+            <p key={index}>
               {message.user.username} : {message.content}
-            </ListGroupItem>
+            </p>
           ))}
-      </ListGroup>
+      </div>
       <div>
-        <Input
+        <input
+          className={"message-bar"}
           value={content}
           onChange={(e) => setContent(e.target.value)}
           onKeyDown={(e) => handleSubmit(e)}
-        ></Input>
-        {/*<Button*/}
-        {/*  onClick={(e) => {*/}
-        {/*    handleSubmit(e);*/}
-        {/*  }}*/}
-        {/*>*/}
-        {/*  Send!*/}
-        {/*</Button>*/}
+        ></input>
       </div>
     </>
   );
