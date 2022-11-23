@@ -4,11 +4,28 @@ class SubscriptionsController < ApplicationController
     # /channels/:id/subscribe
     user = User.find(session[:user_id])
     if user
-      subscription = user.subscriptions.create!(:channel_id=>params[:channel_id])
+      subscription = user.subscriptions.create!(:channel_id=>params[:id]) unless user.subscription.find_by(:channel_id=>params[:id])
       render json: subscription, status: :created
     else
       render json: { error: "Unauthorized. Please login first before subscribing" }, status: :unauthorized
     end
+  end
+
+  def channel_list
+    # /user/channels
+    user = User.find(session[:user_id])
+    if user
+      subscriptions = Subscription.where(user_id: user.id)
+      render json: subscriptions, include: ['channel']
+    else
+      render json: { error: "Unauthorized" }, status: :unauthorized
+    end
+  end
+
+  def user_list
+    # /channels/:id/user_list
+    subscriptions = Subscription.where(channel_id: params[:id])
+    render json: subscriptions, include: ['user']
   end
 
   def destroy
