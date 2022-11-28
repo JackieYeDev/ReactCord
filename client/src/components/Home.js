@@ -1,5 +1,4 @@
 import React from "react";
-import Logout from "./Logout";
 import { Route } from "react-router-dom";
 import SideBar from "./SideBar";
 import "../styles/Home.css";

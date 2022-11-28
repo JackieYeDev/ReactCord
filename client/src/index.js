@@ -6,7 +6,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { UserProvider } from "./context/user";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import NewChannel from "./components/NewChannel";
 import { CableProvider } from "./context/cable";
 import Discover from "./components/Discover";
 
