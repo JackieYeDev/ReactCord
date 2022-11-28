@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { UserContext } from "../context/user";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import "../styles/Channel.css";
+import logoutSymbol from "../assets/Logout_symbol.svg";
 
 function Logout() {
   const [, setUser] = useContext(UserContext);
@@ -9,16 +11,25 @@ function Logout() {
     fetch("/logout", {
       method: "DELETE",
     })
-      .then(() => console.log("Logged out"))
       .then(() => {
         setUser(null);
-        history.push("/");
+        document.cookie = "";
+        history.push("/login");
       })
       .catch((err) => console.error(err));
   }
   return (
-    <div>
-      <button onClick={() => onLogout()}>Logout</button>
+    <div className={"channelWrapper"}>
+      <div className={"channelAvatar"}>
+        <img
+          src={logoutSymbol}
+          className={"channelAvatarImage"}
+          height={48}
+          width={48}
+          alt={"Log out"}
+          onClick={() => onLogout()}
+        ></img>
+      </div>
     </div>
   );
 }

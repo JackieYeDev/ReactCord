@@ -1,0 +1,43 @@
+.channelWrapper {
+    position: relative;
+    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.channelAvatar::before {
+    content: '';
+    width: 17px;
+    top: 20px;
+    height: 20%;
+    display: block;
+    background: #fff;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    left: -14px;
+    position: absolute;
+    transition: var(--transition);
+}
+
+.channelAvatar:hover::before {
+    height: 55%;
+    top: 12px;
+}
+
+.channelAvatarImage {
+    width: 48px;
+    height: 48px;
+    background: var(--light-grey);
+    border-radius: 100%;
+    margin-bottom: 10px;
+    position: relative;
+    left: 10px;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.channelAvatarImage:hover {
+    border-radius: 15px;
+}

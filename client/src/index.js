@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./styles/index.css";
 import App from "./components/App";
 import { BrowserRouter, Route } from "react-router-dom";
 import { UserProvider } from "./context/user";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import NewChannel from "./components/NewChannel";
-import Channels from "./components/Channels";
 import { CableProvider } from "./context/cable";
 import Discover from "./components/Discover";
 
@@ -18,9 +17,7 @@ ReactDOM.render(
         <Route path={"/"} component={App} />
         <Route path={"/login"} component={Login} />
         <Route path={"/signup"} component={Signup} />
-        <Route path={"/new-channel"} component={NewChannel} />
         <Route path={"/discover"} component={Discover} />
-        <Route path={"/channel/:id"} component={Channels} />
       </CableProvider>
     </UserProvider>
   </BrowserRouter>,

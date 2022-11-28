@@ -5,7 +5,7 @@ class ChatChannel < ApplicationCable::Channel
     puts "subscribed to channel_#{params[:id]}"
     channel = Channel.find(params[:id])
     stream_for channel
-    ChatChannel.broadcast_to(channel, channel.messages.order(created_at: :desc).as_json(include: :user))
+    ChatChannel.broadcast_to(channel, channel.messages.order(created_at: :asc).as_json(include: :user))
   end
 
   def receive(data)

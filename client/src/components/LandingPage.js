@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
+// import "bootstrap/dist/css/bootstrap.min.css";
+import "../styles/LandingPage.css";
 import Logout from "./Logout";
-import ChannelMenu from "./ChannelMenu";
+import SideBar from "./SideBar";
 import { UserContext } from "../context/user";
 import { Link } from "react-router-dom";
-import UserList from "./UserList";
 import NavBar from "./NavBar";
 function LandingPage() {
   const [user, setUser] = useContext(UserContext);
@@ -41,20 +42,9 @@ function LandingPage() {
   }, []);
 
   return (
-    <>
-      {user === null ? (
-        <div>
-          <NavBar />
-        </div>
-      ) : (
-        <div>
-          <Logout />
-          <UserList />
-          <Link to={"/new-channel"}>New Channel</Link>
-          <ChannelMenu />
-        </div>
-      )}
-    </>
+    <div className={"app"}>
+      <NavBar />
+    </div>
   );
 }
 export default LandingPage;
