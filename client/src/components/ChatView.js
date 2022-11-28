@@ -4,6 +4,7 @@ import { CableContext } from "../context/cable";
 import MessageCard from "./MessageCard";
 import MessageBox from "./MessageBox";
 import Header from "./Header";
+import "../styles/ChatView.css";
 
 function ChatView() {
   const cableContext = useContext(CableContext);
