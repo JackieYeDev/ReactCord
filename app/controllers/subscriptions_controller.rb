@@ -1,10 +1,10 @@
 class SubscriptionsController < ApplicationController
   def create
     # Creates a subscription to a channels
-    # /channels/:id/subscribe
+    # /subscribe/channels/:id
     user = User.find(session[:user_id])
     if user
-      subscription = user.subscriptions.create!(:channel_id=>params[:id]) unless user.subscription.find_by(:channel_id=>params[:id])
+      subscription = user.subscriptions.create!(:channel_id=>params[:id]) unless user.subscriptions.find_by(:channel_id=>params[:id])
       render json: subscription, status: :created
     else
       render json: { error: "Unauthorized. Please login first before subscribing" }, status: :unauthorized
@@ -31,12 +31,12 @@ class SubscriptionsController < ApplicationController
   def destroy
     # Deletes a particular subscription to a channels.
     # Will not delete messages in the channels
-    # /channels/:id/unsubscribe
+    # /unsubscribe/channels/:id
     user = User.find(session[:user_id])
     if user
-      subscription = Subscription.find_by(:user_id => :user.id, :channel_id => params[:channel_id])
+      subscription = Subscription.find_by(:user_id => user.id, :channel_id => params[:id])
       subscription.destroy
-      head :no_content
+      head :ok
     end
   end
 end

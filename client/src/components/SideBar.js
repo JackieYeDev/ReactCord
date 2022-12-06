@@ -22,7 +22,7 @@ function SideBar() {
 
   useEffect(() => {
     setChannels(user.channels);
-  }, []);
+  }, [user]);
 
   return (
     <div className={"sideBarWrapper"}>

@@ -6,6 +6,7 @@ import ChatView from "./ChatView";
 import NewChannel from "./NewChannel";
 import DirectMessage from "./DirectMessage";
 import { ChannelProvider } from "../context/channel";
+import Discover from "./Discover";
 
 function Home() {
   return (
@@ -16,6 +17,7 @@ function Home() {
           <DirectMessage />
           <Route path={"/new-channel"} component={NewChannel} />
           <Route component={ChatView} path={"/channel/:id"} />
+          <Route path={"/discover"} component={Discover} />
         </div>
       </div>
     </ChannelProvider>

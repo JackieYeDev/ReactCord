@@ -16,7 +16,6 @@ ReactDOM.render(
         <Route path={"/"} component={App} />
         <Route path={"/login"} component={Login} />
         <Route path={"/signup"} component={Signup} />
-        <Route path={"/discover"} component={Discover} />
       </CableProvider>
     </UserProvider>
   </BrowserRouter>,

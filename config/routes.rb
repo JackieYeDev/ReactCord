@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :dms
   resources :messages
   resources :subscriptions
   resources :users
@@ -9,9 +10,11 @@ Rails.application.routes.draw do
   get "/channels", to: "channels#index"
   get "/user/channels", to: "subscriptions#channel_list"
   get "/channels/:id/user", to:"subscriptions#user_list"
+  post "/subscribe/channels/:id", to:"subscriptions#create"
   post "/signup", to: "users#create"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  delete "/unsubscribe/channels/:id", to:"subscriptions#destroy"
 
   mount ActionCable.server => '/cable'
   resources :channels do
