@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { UserContext } from "../context/user";
 import { Link, useHistory } from "react-router-dom";
 import "../styles/Channel.css";
-import logoutSymbol from "../assets/Logout_symbol.svg";
+import logoutSymbol from "../assets/Logout_symbol.png";
 
 function Logout() {
   const [, setUser] = useContext(UserContext);

@@ -1,5 +1,5 @@
 .chatHeader {
-    width: 100%;
+    width: 87%;
     background: var(--light-grey);
     display: flex;
     align-items: center;
@@ -7,6 +7,7 @@
     padding: 10px;
     border-bottom: 1px solid #2022256e;
     z-index: 10;
+    position: fixed;
 }
 
 .roomNameContainer {
