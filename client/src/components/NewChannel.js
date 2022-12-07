@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../context/user";
 
 function NewChannel() {
   const [name, setName] = useState("");
+  const [user, setUser] = useContext(UserContext);
   function handleCreateChannel() {
     fetch("/channels", {
       method: "POST",
@@ -11,7 +13,14 @@ function NewChannel() {
       body: JSON.stringify({ name: name }),
     })
       .then((res) => res.json())
-      .then((response) => console.log(response));
+      .then((response) => {
+        const updatedUser = {
+          ...user,
+          channels: [...user.channels, response],
+        };
+        setUser(updatedUser);
+        setName("");
+      });
   }
   return (
     <div>
