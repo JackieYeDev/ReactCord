@@ -54,30 +54,32 @@ function Discover() {
   }
 
   return (
-    <div>
+    <div className={"row"}>
       {channelList.map((channel, index) => {
         return (
-          <div key={index} className={"card"}>
-            <img
-              src={`https://via.placeholder.com/350x150?text=${channel.name}`}
-              alt={"Channel Image"}
-            ></img>
-            <div className={"container"}>
-              <h4>
-                <b>{channel.name}</b>
-              </h4>
-              <p>{channel.user_count} Members</p>
-            </div>
+          <div className={"column"}>
+            <div key={index} className={"card"}>
+              <img
+                src={`https://via.placeholder.com/350x150?text=${channel.name}`}
+                alt={"Channel Image"}
+              ></img>
+              <div className={"container"}>
+                <h4>
+                  <b>{channel.name}</b>
+                </h4>
+                <p>{channel.user_count} Members</p>
+              </div>
 
-            {user.channels.find((c) => c.id === channel.id) ? (
-              <button onClick={() => handleUnsubscribe(channel.id)}>
-                Unsubscribe
-              </button>
-            ) : (
-              <button onClick={() => handleSubscribe(channel.id)}>
-                Subscribe
-              </button>
-            )}
+              {user.channels.find((c) => c.id === channel.id) ? (
+                <button onClick={() => handleUnsubscribe(channel.id)}>
+                  Unsubscribe
+                </button>
+              ) : (
+                <button onClick={() => handleSubscribe(channel.id)}>
+                  Subscribe
+                </button>
+              )}
+            </div>
           </div>
         );
       })}

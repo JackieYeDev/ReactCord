@@ -7,7 +7,6 @@ import { UserProvider } from "./context/user";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { CableProvider } from "./context/cable";
-import Discover from "./components/Discover";
 
 ReactDOM.render(
   <BrowserRouter>
