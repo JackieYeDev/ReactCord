@@ -18,9 +18,9 @@ function DirectMessage() {
       <div className={"conversationsContainer"}>
         <div className={"dmTitle"}>USER LIST</div>
         {userList !== [] &&
-          userList.map((user) => {
+          userList.map((user, index) => {
             return (
-              <div className={"elementsContainer"} key={user.userId}>
+              <div className={"elementsContainer"} key={index}>
                 <div className={"svgContainer"}>
                   <img
                     height={25}
