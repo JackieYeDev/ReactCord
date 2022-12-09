@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "../styles/Header.css";
 import { ChannelContext } from "../context/channel";
 
-function Header() {
+function Header(props) {
   const [channelName] = useContext(ChannelContext);
   return (
     <div className={"chatHeader"}>
@@ -18,7 +18,14 @@ function Header() {
         <div className={"chatHeaderStatus"} id="online" />
       </div>
       <div className={"headerItem"}>
-        <input type="search" placeholder="Search" />
+        <input
+          type="search"
+          placeholder="Search"
+          value={props.searchString}
+          onChange={(e) => {
+            props.setSearchString(e.target.value);
+          }}
+        />
       </div>
     </div>
   );

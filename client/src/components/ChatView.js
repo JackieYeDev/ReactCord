@@ -10,6 +10,7 @@ function ChatView() {
   const cableContext = useContext(CableContext);
   const { id: channelId } = useParams();
   const [messages, setMessages] = useState([]);
+  const [searchString, setSearchString] = useState("");
   const chatChannel = useRef(null);
   useEffect(() => {
     chatChannel.current = cableContext.cable.subscriptions.create(
@@ -34,12 +35,17 @@ function ChatView() {
     timeStamp = timeStamp.toString();
     return timeStamp;
   }
+
+  const filteredMessage = messages.filter((message) => {
+    return message.content.toLowerCase().includes(searchString.toLowerCase());
+  });
+
   return (
     <div className={"chatView"}>
-      <Header />
+      <Header searchString={searchString} setSearchString={setSearchString} />
       <div className={"messagesContainer"}>
-        {messages !== [] &&
-          messages.map((message, index) => (
+        {filteredMessage !== [] &&
+          filteredMessage.map((message, index) => (
             <MessageCard
               key={index}
               content={message.content}
