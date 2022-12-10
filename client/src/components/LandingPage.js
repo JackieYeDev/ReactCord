@@ -1,13 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
-// import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/LandingPage.css";
-import Logout from "./Logout";
-import SideBar from "./SideBar";
 import { UserContext } from "../context/user";
-import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 function LandingPage() {
-  const [user, setUser] = useContext(UserContext);
+  const [, setUser] = useContext(UserContext);
   const [userList, setUserList] = useState([]);
   // const cable = ActionCable.createConsumer("ws://localhost:3000/cable");
   // const createSubscription = () => {
@@ -41,9 +36,29 @@ function LandingPage() {
       .catch((err) => console.error(err));
   }, []);
 
+  useEffect(() => {
+    let head = document.head;
+    let link = document.createElement("link");
+    link.type = "text/css";
+    link.rel = "stylesheet";
+    link.href =
+      "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css";
+    head.appendChild(link);
+    return () => {
+      head.removeChild(link);
+    };
+  }, []);
   return (
     <div className={"app"}>
       <NavBar />
+      {/*<section className={"py-5 text-center container"}>*/}
+      {/*  <div className={"row py-lg-5"}>*/}
+      {/*    <div className={"col-lg-6 col-md-8 mx-auto"}>*/}
+      {/*      <h1 className={"fw-light"}>Welcome to ReactCord</h1>*/}
+      {/*      <p className={"lead text-muted"}>To get started, please login!</p>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</section>*/}
     </div>
   );
 }

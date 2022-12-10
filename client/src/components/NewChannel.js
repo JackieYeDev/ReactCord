@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../context/user";
+import "../styles/NewChannel.css";
 
 function NewChannel() {
   const [name, setName] = useState("");
@@ -23,13 +24,18 @@ function NewChannel() {
       });
   }
   return (
-    <div>
-      <input
-        placeholder={"Enter new name for channel"}
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <button onClick={() => handleCreateChannel()}>Create Channel.</button>
+    <div className={"newChannelCard"}>
+      <div className={"container"}>
+        <input
+          placeholder={"Enter new name for channel"}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          type={"search"}
+        />
+      </div>
+      <p>
+        <button onClick={() => handleCreateChannel()}>Create Channel</button>
+      </p>
     </div>
   );
 }

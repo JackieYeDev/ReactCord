@@ -1,7 +1,16 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../context/user";
 import { useHistory } from "react-router-dom";
-import {Button, Card, CardText, CardTitle, Form, FormGroup, Input, Label} from "reactstrap";
+import {
+  Button,
+  Card,
+  CardText,
+  CardTitle,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+} from "reactstrap";
 
 function Login() {
   const [, setUser] = useContext(UserContext);
@@ -25,7 +34,7 @@ function Login() {
         password: formData.password,
       }),
     }).then((res) => {
-      console.log(res);
+      //console.log(res);
       if (res.ok) {
         res.json().then((response) => {
           setUser(response);
@@ -37,10 +46,19 @@ function Login() {
     });
   }
   return (
-    <Card body style={{ backgroundColor: "#36393F", width: "36rem" }}>
+    <Card
+      body
+      style={{
+        backgroundColor: "#36393F",
+        width: "36rem",
+        margin: "0 auto",
+        float: "none",
+        marginBottom: "10px",
+      }}
+    >
       <CardTitle
         className={"text-center"}
-        style={{ fontSize: "25px", color: "white" }}
+        style={{ fontSize: "24px", color: "white" }}
       >
         Welcome back!
       </CardTitle>
@@ -50,7 +68,9 @@ function Login() {
       >
         We're so excited to see you again!
       </CardText>
-      <CardText>
+      <CardText
+        style={{ fontSize: "12px", color: "#B9BBBE", textAlign: "left" }}
+      >
         <Form onSubmit={(e) => handleSubmit(e)}>
           <FormGroup>
             <Label
@@ -81,15 +101,21 @@ function Login() {
               onChange={(e) => handleFormDataInput(e)}
             />
           </FormGroup>
-          <Button type={"submit"}>Log In</Button>
+          <Button
+            type={"submit"}
+            style={{ width: "100%", background: "#5865F2" }}
+          >
+            Log In
+          </Button>
         </Form>
       </CardText>
 
-      <CardText style={{ fontSize: "14px", color: "#A3A6AA" }}>
+      <CardText
+        style={{ fontSize: "14px", color: "#A3A6AA", textAlign: "left" }}
+      >
         Need an account? <a href={"/signup"}>Register</a>
       </CardText>
     </Card>
-
   );
 }
 
