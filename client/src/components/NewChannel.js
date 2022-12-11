@@ -6,6 +6,9 @@ function NewChannel() {
   const [name, setName] = useState("");
   const [user, setUser] = useContext(UserContext);
   function handleCreateChannel() {
+    if (name.length === 0) {
+      return null;
+    }
     fetch("/channels", {
       method: "POST",
       headers: {
@@ -33,9 +36,12 @@ function NewChannel() {
           type={"search"}
         />
       </div>
-      <p>
-        <button onClick={() => handleCreateChannel()}>Create Channel</button>
-      </p>
+
+      <div className={"wrapperButton"}>
+        <button className={"greenButton"} onClick={() => handleCreateChannel()}>
+          Create Channel
+        </button>
+      </div>
     </div>
   );
 }

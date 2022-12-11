@@ -5,8 +5,32 @@
     border-radius: 5px; /* 5px rounded corners */
     text-align: center;
     padding: 16px;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
+    top: 40%;
+    left: 40%;
+    /*margin-right: -50%;*/
+    width: 25%;
     position: absolute;
+}
+
+.wrapperButton {
+    margin: 0 auto !important;
+    width: 60%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: block;
+}
+
+.greenButton {
+    display: inline-block;
+    font-family: Whitney, "Open Sans", Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 11pt;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 45px;
+    width: 200px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    background-color: #43b581;
+    border: 2px solid #43b581;
+    color: #fff;
 }
