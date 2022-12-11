@@ -50,3 +50,33 @@
 img {
     border-radius: 5px 5px 0 0;
 }
+
+.greenButton {
+    display: inline-block;
+    font-family: Whitney, "Open Sans", Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 11pt;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 45px;
+    width: 200px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    background-color: #43b581;
+    border: 2px solid #43b581;
+    color: #fff;
+}
+
+.redButton {
+    display: inline-block;
+    font-family: Whitney, "Open Sans", Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 11pt;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 45px;
+    width: 200px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    background-color: #b54343;
+    border: 2px solid #b54343;
+    color: #fff;
+}

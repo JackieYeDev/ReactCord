@@ -71,11 +71,17 @@ function Discover() {
               </div>
 
               {user.channels.find((c) => c.id === channel.id) ? (
-                <button onClick={() => handleUnsubscribe(channel.id)}>
+                <button
+                  className={"redButton"}
+                  onClick={() => handleUnsubscribe(channel.id)}
+                >
                   Unsubscribe
                 </button>
               ) : (
-                <button onClick={() => handleSubscribe(channel.id)}>
+                <button
+                  className={"greenButton"}
+                  onClick={() => handleSubscribe(channel.id)}
+                >
                   Subscribe
                 </button>
               )}
