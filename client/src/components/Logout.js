@@ -14,7 +14,7 @@ function Logout() {
       .then(() => {
         setUser(null);
         document.cookie = "";
-        history.push("/login");
+        history.push("/");
       })
       .catch((err) => console.error(err));
   }

@@ -1,41 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
-import { UserContext } from "../context/user";
+import React, { useEffect } from "react";
 import NavBar from "./NavBar";
+import { Route, useHistory } from "react-router-dom";
+import Description from "./Description";
+import Login from "./Login";
+import Signup from "./Signup";
 function LandingPage() {
-  const [, setUser] = useContext(UserContext);
-  const [userList, setUserList] = useState([]);
-  // const cable = ActionCable.createConsumer("ws://localhost:3000/cable");
-  // const createSubscription = () => {
-  //   cable.subscriptions.create(
-  //     { channel: "UserChannel" },
-  //     {
-  //       connected: () => console.log("Connected"),
-  //       disconnected: () => console.log("Disconnected"),
-  //       received: (data) => {
-  //         console.log(data);
-  //         setUserList([...userList, data]);
-  //       },
-  //     }
-  //   );
-  // };
-  // useEffect(() => {
-  //   createSubscription();
-  // }, []);
-
-  useEffect(() => {
-    fetch("/me", {
-      method: "GET",
-    })
-      .then((res) => {
-        if (res.ok) {
-          res.json().then((response) => {
-            setUser(response);
-          });
-        }
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
+  const path = useHistory();
   useEffect(() => {
     let head = document.head;
     let link = document.createElement("link");
@@ -51,14 +21,9 @@ function LandingPage() {
   return (
     <div className={"app"}>
       <NavBar />
-      {/*<section className={"py-5 text-center container"}>*/}
-      {/*  <div className={"row py-lg-5"}>*/}
-      {/*    <div className={"col-lg-6 col-md-8 mx-auto"}>*/}
-      {/*      <h1 className={"fw-light"}>Welcome to ReactCord</h1>*/}
-      {/*      <p className={"lead text-muted"}>To get started, please login!</p>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</section>*/}
+      {path.location.pathname === "/" ? <Description /> : null}
+      <Route path={"/login"} component={Login}></Route>
+      <Route path={"/signup"} component={Signup}></Route>
     </div>
   );
 }
