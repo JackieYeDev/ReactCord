@@ -6,7 +6,7 @@ const CableContext = React.createContext();
 function CableProvider({ children }) {
   const actionCableUrl =
     process.env.NODE_ENV === "production"
-      ? "wss://<your-deployed-app-domain>.com/cable"
+      ? "wss://reactcord.onrender.com/cable"
       : "ws://localhost:3000/cable";
 
   const CableApp = {};
